@@ -1,0 +1,17 @@
+{% if department.subdepartments.all or department.employees.all %}
+<ul>
+    {% for subdepartment in department.subdepartments.all %}
+        <li>
+            <span>{{ subdepartment.name }}</span>
+            {% include 'department_branch.html' with department=subdepartment %}
+        </li>
+    {% endfor %}
+
+{% for employee in department.employees.all %}
+    <li>
+        <span><a href="{% url 'employee_detail' employee.id %}">{{ employee.full_name }}</a> ({{ employee.position }})</span>
+    </li>
+{% endfor %}
+
+</ul>
+{% endif %}
